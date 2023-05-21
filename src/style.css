@@ -7,23 +7,44 @@
     background: #083644;
 }
 
+.menu {
+    max-width: 700px;
+    display: block;
+    margin: auto;
+    padding: 0 30px;
+}
+
 .btn-back {
     text-decoration: none;
     background: transparent;
     border: none;
-    margin: 16px 20px;
+    margin-top: 16px;
 }
 
-.btn-back-icon {
+.btn-back-icon{
     display: inline;
+    margin: 0 8px 4px;
 }
 
 .btn-back-text {
     display: inline;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 18px;
     line-height: 27px;
     color: #ffffff;
+}
+
+.btn-heart, .btn-folder {
+    margin-top: 20px;
+    padding: 0;
+}
+
+.btn-heart:hover, .btn-folder:hover {
+    cursor: pointer;
+}
+
+.btn-folder {
+    margin-left: 20px;
 }

@@ -1,0 +1,29 @@
+.header {
+    position: absolute;
+    width: 100%;
+    height: 62px;
+    left: 0px;
+    top: 0px;
+    background: #083644;
+}
+
+.btn-back {
+    text-decoration: none;
+    background: transparent;
+    border: none;
+    margin: 16px 20px;
+}
+
+.btn-back-icon {
+    display: inline;
+}
+
+.btn-back-text {
+    display: inline;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 27px;
+    color: #ffffff;
+}

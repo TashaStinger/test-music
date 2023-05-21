@@ -21,27 +21,35 @@
         top: 0px;
         background: #083644;
       }
-      .link-back {
-        position: absolute;
-        width: 44px;
-        height: 27px;
-        left: 50px;
-        top: 17px;
+      .btn-back {
+        text-decoration: none;
+        background: transparent;
+        border: none;
+        margin: 16px 20px;
+      }
 
+      .btn-back-icon {
+        display: inline;
+      }
+
+      .btn-back-text {
+        display: inline;
         font-family: Verdana, Geneva, Tahoma, sans-serif;
         font-style: normal;
         font-weight: 400;
         font-size: 18px;
         line-height: 27px;
         color: #ffffff;
-        text-decoration: none;
       }
     </style>
   </head>
   <body>
     <div class="container">
       <div class="header">
-        <a href="" class="link-back">Back</a>
+        <button class="btn-back">
+          <img src="src/back_icon.png" class="btn-back-icon" />
+          <div class="btn-back-text">Back</div>
+        </button>
       </div>
     </div>
     <script>

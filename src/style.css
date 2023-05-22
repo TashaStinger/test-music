@@ -56,10 +56,9 @@
     margin: auto;
 }
 
-.input-artist, .select-genre, .select-decade{
+.input-artist/*, .select-genre, .select-decade*/{
     width: 100%;
-    height: 42px;
-    padding: 12px 14px;
+    padding: 10px 12px;
     margin-bottom: 14px;
     font-family: Plus Jakarta Sans;
     color: #6C7072;
@@ -68,6 +67,11 @@
     border-radius: 4px;
 }
 
-.select-genre {
-    padding-left: 10px;
+.select-genre, .select-decade {
+    font-family: Plus Jakarta Sans;
+    color: #6C7072;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 12px;
 }
+

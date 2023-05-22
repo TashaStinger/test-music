@@ -71,11 +71,12 @@ body {
     border-radius: 4px;
 }
 
-.select-genre, .select-decade {
+.select-genre, .select-decade, .select-country {
     font-family: Plus Jakarta Sans, Verdana, Geneva, Tahoma, sans-serif;
     color: #6C7072;
     padding-top: 10px;
     padding-bottom: 10px;
     padding-left: 12px;
+    margin-bottom: 14px;
 }
 

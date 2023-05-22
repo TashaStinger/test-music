@@ -9,7 +9,7 @@ body {
 }
 
 .menu {
-    max-width: 700px;
+    max-width: 600px;
     display: block;
     margin: auto;
     padding: 0 20px;
@@ -52,7 +52,7 @@ body {
 }
 
 .content {
-    max-width: 700px;
+    max-width: 600px;
     /* background-color:lightgrey; */
     color:#083644;
     padding: 20px 20px;
@@ -80,3 +80,11 @@ body {
     margin-bottom: 14px;
 }
 
+.button-search {
+    font-family: Plus Jakarta Sans, Verdana, Geneva, Tahoma, sans-serif;
+    background: #083644;
+    border: none;
+    width: 100%;
+    height: 44px;
+    color: white;
+}

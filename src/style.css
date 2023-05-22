@@ -104,7 +104,14 @@ body {
 
 .image-album {
     width: 100%;
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
+    top: -20px;
+    position: relative;
+    z-index: 1;
+}
+
+.album-icon {
+    width: 100%;
 }
 
 .album-card h3{
@@ -121,6 +128,19 @@ body {
 
 .album-card li{
     margin-bottom: 2px;
+}
+
+.btn-heart2 {
+    border: none;
+    background-color: #ffffff;
+    position: relative;
+    left: 10px;
+    top: 15px;
+    /* width: 24px;
+    height: 24px; */
+    border-radius: 4px;
+    padding: 4px;
+    z-index: 3;
 }
 
 .page-link,

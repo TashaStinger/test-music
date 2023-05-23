@@ -2,7 +2,7 @@ let plates=[
     {
         name: "Let There Be Rock",
         artist: "AC/DC",
-        year: "1990",
+        year: 1990,
         style: "Rock",
         country: "USA",
         imgUrl: "images/img1.png"
@@ -10,7 +10,7 @@ let plates=[
     {
         name: "Song 2",
         artist: "Artist 2",
-        year: "1992",
+        year: 1992,
         style: "Genre 2",
         country: "USA",
         imgUrl: "images/img2.png"
@@ -18,7 +18,7 @@ let plates=[
     {
         name: "Song 3",
         artist: "Artist 3",
-        year: "1993",
+        year: 1993,
         style: "Genre 3",
         country: "Country 3",
         imgUrl: "images/img3.png"
@@ -26,7 +26,7 @@ let plates=[
     {
         name: "Song 4",
         artist: "Artist 4",
-        year: "1994",
+        year: 1954,
         style: "Rock",
         country: "USA",
         imgUrl: "images/img4.png"
@@ -34,7 +34,7 @@ let plates=[
     {
         name: "Song 5",
         artist: "Artist 5",
-        year: "1995",
+        year: 1955,
         style: "Genre 5",
         country: "USA",
         imgUrl: "images/img5.png"
@@ -42,7 +42,7 @@ let plates=[
     {
         name: "Song 6",
         artist: "Artist 6",
-        year: "1996",
+        year: 2004,
         style: "Rock",
         country: "Country 6",
         imgUrl: "images/img6.png"
@@ -62,10 +62,40 @@ function checkArtistNameLength() {
 
 function genreFilter(currentPlates){
     let genre=document.querySelector("#genre").value;
+    filteredPlates = [];
+    filteredPlatesCount = 0;
+
     if (genre !== "") {
         currentPlates.forEach(function(plate, index) {
             if (index < currentPlates.length) {
                 if (plate.style === genre){
+                    filteredPlates[filteredPlatesCount] = plate;
+                    filteredPlatesCount++;
+                }
+            }
+        })
+    } else {
+        filteredPlates = currentPlates;
+        filteredPlatesCount = currentPlates.length;
+    } 
+    showPlateCards(filteredPlates);
+}
+
+function decadeFilter(currentPlates){
+    let decade=document.querySelector("#decade").value;
+    
+    let filteredYears = [parseInt(decade)];
+    for (let i = 1; i < 10; i++) {
+        filteredYears[i]= filteredYears[0] + i;
+    }
+
+    filteredPlates = [];
+    filteredPlatesCount = 0;
+
+    if (decade !== "") {
+        currentPlates.forEach(function(plate, index) {
+            if (index < currentPlates.length) {
+                if (filteredYears.includes(plate.year)){
                     filteredPlates[filteredPlatesCount] = plate;
                     filteredPlatesCount++;
                 }
@@ -102,9 +132,9 @@ function countryFilter(currentPlates){
 function handleSearchClick(event){
     event.preventDefault();
     checkArtistNameLength();
-    filteredPlates = [];
-    filteredPlatesCount = 0;
+    
     genreFilter(plates);
+    decadeFilter(filteredPlates);
     countryFilter(filteredPlates);
 }
 

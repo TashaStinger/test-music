@@ -3,7 +3,7 @@ let plates=[
         name: "Let There Be Rock",
         artist: "AC/DC",
         year: "1990",
-        style: "Punk, Dub, Funk",
+        style: "Rock",
         country: "USA",
         imgUrl: "images/img1.png"
     },
@@ -27,7 +27,7 @@ let plates=[
         name: "Song 4",
         artist: "Artist 4",
         year: "1994",
-        style: "Genre 4",
+        style: "Rock",
         country: "Country 4",
         imgUrl: "images/img4.png"
     },
@@ -43,47 +43,67 @@ let plates=[
         name: "Song 6",
         artist: "Artist 6",
         year: "1996",
-        style: "Genre 6",
+        style: "Rock",
         country: "Country 6",
         imgUrl: "images/img6.png"
     }
 ]
 
-function checkArtistInputLength(event){
-    event.preventDefault();
+let filteredPlates = [];
+let filteredPlatesCount = 0;
+
+function checkArtistNameLength() {
     let artistName = document.querySelector("#artist");
     artistName = artistName.value.trim();
     if (artistName.length > 10) {
         alert("Artist name is too long! You can type 10 symbols.");
     }
-    console.log(artistName);
 }
 
-function showPlateCards(){
+function genreFilter(currentPlates){
+    let genre=document.querySelector("#genre").value;
+    currentPlates.forEach(function(plate, index) {
+        if (index < currentPlates.length) {
+            if (plate.style === genre){
+                filteredPlates[filteredPlatesCount] = plate;
+                filteredPlatesCount++;
+            }
+        }
+    })
+    showPlateCards(filteredPlates);
+}
+
+function handleSearchClick(event){
+    event.preventDefault();
+    checkArtistNameLength();
+    genreFilter(plates);
+}
+
+function showPlateCards(currentPlates){
     let platesHTML = `
         <div class="row">`;
-    plates.forEach(function(plate, index) {
-        if (index < plates.length) {
+    currentPlates.forEach(function(plate, index) {
+        if (index < currentPlates.length) {
             platesHTML += `
                 <div class="col-6 pe-2">
                 <div class="plate-card">
-                    <button type="button" class="btn-heart2"><img src="images/heart2_icon.png" /></button>
+                    <button type="button" class="btn-heart2">
+                        <img src="images/heart2_icon.png" />
+                    </button>
                     <div class="image-plate">
-                    <img src="${plate.imgUrl}" class="img-fluid plate-icon" />  
+                        <img src="${plate.imgUrl}" class="img-fluid plate-icon" />  
                     </div>
                     <h3>${plate.name}</h3>
                     <p class="mb-2">
-                    ${plate.artist}
-                    <ul>
-                        <li><span class="text-black-50">Year: </span>${plate.year}</li>
-                        <li>
-                        <span class="text-black-50">Style: </span>${plate.year}
-                        </li>
-                        <li><span class="text-black-50">Country: </span>${plate.country}</li>
-                    </ul>
+                        ${plate.artist}
+                        <ul>
+                            <li><span class="text-black-50">Year: </span>${plate.year}</li>
+                            <li><span class="text-black-50">Style: </span>${plate.style}</li>
+                            <li><span class="text-black-50">Country: </span>${plate.country}</li>
+                        </ul>
                     </p>
                     <button type="button" class="btn btn-dark button-add">
-                    Add +
+                        Add +
                     </button>
                 </div>
                 </div>
@@ -99,5 +119,5 @@ document.getElementById("go-back").addEventListener("click", () => {
   history.back();
 });
 
-document.querySelector("#search").addEventListener("click", checkArtistInputLength);
-showPlateCards();
+document.querySelector("#search").addEventListener("click", handleSearchClick);
+showPlateCards(plates);

@@ -17,26 +17,26 @@ let plates=[
     },
     {
         name: "Song 3",
-        artist: "Artist 3",
+        artist: "Artist 2",
         year: 1993,
         style: "Popular",
-        country: "Ukraine",
+        country: "USA",
         imgUrl: "images/img3.png"
     },
     {
         name: "Song 4",
         artist: "Artist 4",
         year: 1954,
-        style: "Rock",
-        country: "USA",
+        style: "Popular",
+        country: "France",
         imgUrl: "images/img4.png"
     },
     {
         name: "Song 5",
-        artist: "Artist 5",
+        artist: "Artist 4",
         year: 1955,
-        style: "Classical",
-        country: "USA",
+        style: "Popular",
+        country: "France",
         imgUrl: "images/img5.png"
     },
     {
@@ -44,7 +44,7 @@ let plates=[
         artist: "Artist 6",
         year: 2004,
         style: "Rock",
-        country: "Spain",
+        country: "Ukraine",
         imgUrl: "images/img6.png"
     }
 ]
@@ -129,6 +129,27 @@ function countryFilter(currentPlates){
     showPlateCards(filteredPlates);
 }
 
+function artistFilter(currentPlates) {
+    let artist=document.querySelector("#artist").value.trim();
+    filteredPlates = [];
+    filteredPlatesCount = 0;
+
+    if (artist !== "") {
+        currentPlates.forEach(function(plate, index) {
+            if (index < currentPlates.length) {
+                if (plate.artist === artist){
+                    filteredPlates[filteredPlatesCount] = plate;
+                    filteredPlatesCount++;
+                }
+            }
+        })
+    } else {
+        filteredPlates = currentPlates;
+        filteredPlatesCount = currentPlates.length;
+    } 
+    showPlateCards(filteredPlates);
+}
+
 function handleSearchClick(event){
     event.preventDefault();
     checkArtistNameLength();
@@ -136,6 +157,7 @@ function handleSearchClick(event){
     genreFilter(plates);
     decadeFilter(filteredPlates);
     countryFilter(filteredPlates);
+    artistFilter(filteredPlates);
 }
 
 function showPlateCards(currentPlates){

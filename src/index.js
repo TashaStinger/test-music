@@ -28,7 +28,7 @@ let plates=[
         artist: "Artist 4",
         year: "1994",
         style: "Rock",
-        country: "Country 4",
+        country: "USA",
         imgUrl: "images/img4.png"
     },
     {
@@ -62,21 +62,50 @@ function checkArtistNameLength() {
 
 function genreFilter(currentPlates){
     let genre=document.querySelector("#genre").value;
-    currentPlates.forEach(function(plate, index) {
-        if (index < currentPlates.length) {
-            if (plate.style === genre){
-                filteredPlates[filteredPlatesCount] = plate;
-                filteredPlatesCount++;
+    if (genre !== "") {
+        currentPlates.forEach(function(plate, index) {
+            if (index < currentPlates.length) {
+                if (plate.style === genre){
+                    filteredPlates[filteredPlatesCount] = plate;
+                    filteredPlatesCount++;
+                }
             }
-        }
-    })
+        })
+    } else {
+        filteredPlates = currentPlates;
+        filteredPlatesCount = currentPlates.length;
+    } 
+    showPlateCards(filteredPlates);
+}
+
+function countryFilter(currentPlates){
+    let country=document.querySelector("#country").value;
+    filteredPlates = [];
+    filteredPlatesCount = 0;
+
+    if (country !== "") {
+        currentPlates.forEach(function(plate, index) {
+            if (index < currentPlates.length) {
+                if (plate.country === country){
+                    filteredPlates[filteredPlatesCount] = plate;
+                    filteredPlatesCount++;
+                }
+            }
+        })
+    } else {
+        filteredPlates = currentPlates;
+        filteredPlatesCount = currentPlates.length;
+    } 
     showPlateCards(filteredPlates);
 }
 
 function handleSearchClick(event){
     event.preventDefault();
     checkArtistNameLength();
+    filteredPlates = [];
+    filteredPlatesCount = 0;
     genreFilter(plates);
+    countryFilter(filteredPlates);
 }
 
 function showPlateCards(currentPlates){

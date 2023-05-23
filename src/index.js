@@ -12,7 +12,7 @@ let plates=[
         artist: "Artist 2",
         year: "1992",
         style: "Genre 2",
-        country: "Country 2",
+        country: "USA",
         imgUrl: "images/img2.png"
     },
     {
@@ -36,7 +36,7 @@ let plates=[
         artist: "Artist 5",
         year: "1995",
         style: "Genre 5",
-        country: "Country 5",
+        country: "USA",
         imgUrl: "images/img5.png"
     },
     {

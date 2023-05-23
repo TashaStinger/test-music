@@ -46,8 +46,13 @@
       </div>
 
       <div class="content">
-        <form class="form-search">
-          <input type="text" class="input-artist" placeholder="Artist" />
+        <form id="search-form" class="form-search">
+          <input
+            type="text"
+            id="artist"
+            class="input-artist"
+            placeholder="Artist"
+          />
           <div class="row">
             <div class="col pe-2">
               <select class="select-genre form-select">
@@ -86,150 +91,13 @@
             <option value="UK">United Kingdom</option>
             <option value="USA">USA</option>
           </select>
-          <button type="button" class="btn btn-dark button-search">
+          <button type="button" id="search" class="btn btn-dark button-search">
             Search
           </button>
         </form>
 
-        <div class="albums">
-          <div class="row">
-            <div class="col pe-2">
-              <div class="album-card">
-                <button type="button" class="btn-heart2"><img src="images/heart2_icon.png" /></button>
-                <div class="image-album">
-                  <img src="images/img1.png" class="img-fluid album-icon" />  
-                </div>
-                <h3>Let There Be Rock</h3>
-                <p class="mb-2">
-                  AC/DC
-                  <ul>
-                    <li><span class="text-black-50">Year: </span>1990</li>
-                    <li>
-                      <span class="text-black-50">Style: </span>Punk, Dub, Funk
-                    </li>
-                    <li><span class="text-black-50">Country: </span>USA</li>
-                  </ul>
-                </p>
-                <button type="button" class="btn btn-dark button-add">
-                  Add +
-                </button>
-              </div>
-            </div>
-            <div class="col ps-2">
-              <div class="album-card">
-                <button type="button" class="btn-heart2"><img src="images/heart2_icon.png" /></button>
-                <div class="image-album">
-                  <img src="images/img2.png" class="img-fluid album-icon" />  
-                </div>
-                <h3>Let There Be Rock</h3>
-                <p class="mb-2">
-                  AC/DC
-                  <ul>
-                    <li><span class="text-black-50">Year: </span>1990</li>
-                    <li>
-                      <span class="text-black-50">Style: </span>Punk, Dub, Funk
-                    </li>
-                    <li><span class="text-black-50">Country: </span>USA</li>
-                  </ul>
-                </p>
-                <button type="button" class="btn btn-dark button-add">
-                  Add +
-                </button>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col pe-2">
-              <div class="album-card">
-                <button type="button" class="btn-heart2"><img src="images/heart2_icon.png" /></button>
-                <div class="image-album">
-                  <img src="images/img3.png" class="img-fluid album-icon" />  
-                </div>
-                <h3>Let There Be Rock</h3>
-                <p class="mb-2">
-                  AC/DC
-                  <ul>
-                    <li><span class="text-black-50">Year: </span>1990</li>
-                    <li>
-                      <span class="text-black-50">Style: </span>Punk, Dub, Funk
-                    </li>
-                    <li><span class="text-black-50">Country: </span>USA</li>
-                  </ul>
-                </p>
-                <button type="button" class="btn btn-dark button-add">
-                  Add +
-                </button>
-              </div>
-            </div>
-            <div class="col ps-2">
-              <div class="album-card">
-                <button type="button" class="btn-heart2"><img src="images/heart2_icon.png" /></button>
-                <div class="image-album">
-                  <img src="images/img4.png" class="img-fluid album-icon" />  
-                </div>
-                <h3>Let There Be Rock</h3>
-                <p class="mb-2">
-                  AC/DC
-                  <ul>
-                    <li><span class="text-black-50">Year: </span>1990</li>
-                    <li>
-                      <span class="text-black-50">Style: </span>Punk, Dub, Funk
-                    </li>
-                    <li><span class="text-black-50">Country: </span>USA</li>
-                  </ul>
-                </p>
-                <button type="button" class="btn btn-dark button-add">
-                  Add +
-                </button>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col pe-2">
-              <div class="album-card">
-                <button type="button" class="btn-heart2"><img src="images/heart2_icon.png" /></button>
-                <div class="image-album">
-                  <img src="images/img5.png" class="img-fluid album-icon" />  
-                </div>
-                <h3>Let There Be Rock</h3>
-                <p class="mb-2">
-                  AC/DC
-                  <ul>
-                    <li><span class="text-black-50">Year: </span>1990</li>
-                    <li>
-                      <span class="text-black-50">Style: </span>Punk, Dub, Funk
-                    </li>
-                    <li><span class="text-black-50">Country: </span>USA</li>
-                  </ul>
-                </p>
-                <button type="button" class="btn btn-dark button-add">
-                  Add +
-                </button>
-              </div>
-            </div>
-            <div class="col ps-2">
-              <div class="album-card">
-                <button type="button" class="btn-heart2"><img src="images/heart2_icon.png" /></button>
-                <div class="image-album">
-                  <img src="images/img6.png" class="img-fluid album-icon" />  
-                </div>
-                <h3>Let There Be Rock</h3> 
-                <p class="mb-2">
-                  AC/DC
-                  <ul>
-                    <li><span class="text-black-50">Year: </span>1990</li>
-                    <li>
-                      <span class="text-black-50">Style: </span>Punk, Dub, Funk
-                    </li>
-                    <li><span class="text-black-50">Country: </span>USA</li>
-                  </ul>
-                </p>
-                <button type="button" class="btn btn-dark button-add">
-                  Add +
-                </button>
-              </div>
-            </div>
-          </div>
+        <div id="plates">
+          <!-- Plates -->
         </div>
 
         <nav aria-label="Page navigation example">

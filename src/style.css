@@ -93,7 +93,7 @@ body {
     color: white;
 } */
 
-.album-card {
+.plate-card {
     margin-bottom: 14px;
     font-style: normal;
     font-weight: 500;
@@ -102,7 +102,7 @@ body {
     color: #0A2530;
 }
 
-.image-album {
+.image-plate {
     width: 100%;
     /* margin-bottom: 10px; */
     top: -20px;
@@ -110,23 +110,23 @@ body {
     z-index: 1;
 }
 
-.album-icon {
+.plate-icon {
     width: 100%;
 }
 
-.album-card h3{
+.plate-card h3{
     font-weight: 700;
     font-size: 14px;
     line-height: 18px;
     margin-bottom: 4px;
 }
 
-.album-card ul{
+.plate-card ul{
     padding: 0;
     list-style: none;
 }
 
-.album-card li{
+.plate-card li{
     margin-bottom: 2px;
 }
 

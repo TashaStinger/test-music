@@ -11,7 +11,7 @@ let plates=[
         name: "Song 2",
         artist: "Artist 2",
         year: 1992,
-        style: "Genre 2",
+        style: "Popular",
         country: "USA",
         imgUrl: "images/img2.png"
     },
@@ -19,8 +19,8 @@ let plates=[
         name: "Song 3",
         artist: "Artist 3",
         year: 1993,
-        style: "Genre 3",
-        country: "Country 3",
+        style: "Popular",
+        country: "Ukraine",
         imgUrl: "images/img3.png"
     },
     {
@@ -35,7 +35,7 @@ let plates=[
         name: "Song 5",
         artist: "Artist 5",
         year: 1955,
-        style: "Genre 5",
+        style: "Classical",
         country: "USA",
         imgUrl: "images/img5.png"
     },
@@ -44,7 +44,7 @@ let plates=[
         artist: "Artist 6",
         year: 2004,
         style: "Rock",
-        country: "Country 6",
+        country: "Spain",
         imgUrl: "images/img6.png"
     }
 ]
@@ -83,7 +83,7 @@ function genreFilter(currentPlates){
 
 function decadeFilter(currentPlates){
     let decade=document.querySelector("#decade").value;
-    
+
     let filteredYears = [parseInt(decade)];
     for (let i = 1; i < 10; i++) {
         filteredYears[i]= filteredYears[0] + i;

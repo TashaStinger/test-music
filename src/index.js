@@ -50,7 +50,7 @@ let plates=[
     {
         name: "Song 7",
         artist: "AC/DC",
-        year: 1990,
+        year: 1998,
         style: "Rock",
         country: "USA",
         imgUrl: "images/img1.png"
@@ -58,7 +58,7 @@ let plates=[
     {
         name: "Song 8",
         artist: "Artist 2",
-        year: 1992,
+        year: 1999,
         style: "Popular",
         country: "USA",
         imgUrl: "images/img2.png"
@@ -66,7 +66,7 @@ let plates=[
     {
         name: "Song 9",
         artist: "Artist 2",
-        year: 1993,
+        year: 1997,
         style: "Popular",
         country: "USA",
         imgUrl: "images/img3.png"
@@ -117,6 +117,12 @@ let filteredPlates = plates;
 let filteredPlatesCount = plates.length;
 let maxPlatesOnPage = 6;
 let pageNumber = 1; 
+   
+let collection = [];
+let favoutites = [];
+
+let collectionFromStorage = JSON.parse(window.localStorage.getItem('collection'));
+
 
 function checkArtistNameLength() {
     let artistName = document.querySelector("#artist");
@@ -127,7 +133,7 @@ function checkArtistNameLength() {
 }
 
 function genreFilter(currentPlates){
-    let genre=document.querySelector("#genre").value;
+    let genre = document.querySelector("#genre").value;
     filteredPlates = [];
     filteredPlatesCount = 0;
 
@@ -144,7 +150,6 @@ function genreFilter(currentPlates){
         filteredPlates = currentPlates;
         filteredPlatesCount = currentPlates.length;
     } 
-    showPlateCards(filteredPlates);
 }
 
 function decadeFilter(currentPlates){
@@ -171,7 +176,6 @@ function decadeFilter(currentPlates){
         filteredPlates = currentPlates;
         filteredPlatesCount = currentPlates.length;
     } 
-    showPlateCards(filteredPlates);
 }
 
 function countryFilter(currentPlates){
@@ -192,7 +196,6 @@ function countryFilter(currentPlates){
         filteredPlates = currentPlates;
         filteredPlatesCount = currentPlates.length;
     } 
-    showPlateCards(filteredPlates);
 }
 
 function artistFilter(currentPlates) {
@@ -213,20 +216,151 @@ function artistFilter(currentPlates) {
         filteredPlates = currentPlates;
         filteredPlatesCount = currentPlates.length;
     } 
-    showPlateCards(filteredPlates);
 }
 
-function handleSearchClick(event){
-    // event.preventDefault();
-    pageNumber = 1;
+function setNewSearchParams(){
+    let newSerchParams = ``;
+    let artist = document.querySelector("#artist").value.trim();
+    let genre = document.querySelector("#genre").value;
+    let decade = document.querySelector("#decade").value;
+    let country = document.querySelector("#country").value;
+    
+    if (genre !== "" || decade !== "" || country !== "" || pageNumber > 1) {
+        newSerchParams = `?`;
+    }
+
+    // if (artist !== "") {
+    //     newSerchParams+=`artist=${artist}`;
+    //     if (genre !== "" || decade !== "" || country !== "") {
+    //         newSerchParams += `&`;
+    //     }
+    // }
+
+    if (genre !== "") {
+        newSerchParams+=`genre=${genre}`;
+        if (decade !== "" || country !== "") {
+            newSerchParams += `&`;
+
+        }
+    }
+    if (decade !== "") {
+        newSerchParams+=`decade=${decade}`;
+        if (country !== "") {
+            newSerchParams += `&`;
+        }
+    }
+    if (country !== "") {
+        newSerchParams += `country=${country}`;
+    }
+    if (pageNumber > 1) {
+        newSerchParams += `&page=${pageNumber}`
+    }
+    window.history.pushState("", "", newSerchParams);
+}
+
+function search(){
     filteredPlates = plates;
-    filteredPlatesCount = plates.length
+    filteredPlatesCount = plates.length;
     checkArtistNameLength();
     
     genreFilter(filteredPlates);
     decadeFilter(filteredPlates);
     countryFilter(filteredPlates);
     artistFilter(filteredPlates);
+
+    showPlateCards(filteredPlates);
+    setNewSearchParams();
+    // getPageNumber();
+}
+
+function handleSearchClick(){
+    pageNumber = 1;
+    search();
+}
+
+function buttonsAddEventListeners(currentPlates){
+    currentPlates.forEach(function(plate, index) {
+        if (index >= maxPlatesOnPage * (pageNumber - 1)) {
+            if (index < maxPlatesOnPage * pageNumber) {
+                document.querySelector(`#button-add-${plates.indexOf(plate)}`).addEventListener("click", addToCollection);
+            }
+        }
+    })
+}
+
+function addToCollection(event) {
+    event.preventDefault();
+    alert("Add to Collection?");
+    let currentPlate = plates[parseInt(event.target.id.slice(11))];
+    if (collection.indexOf(currentPlate) === -1) {
+        collection.push(currentPlate);
+        console.log(collection);
+        window.localStorage.removeItem('collection');
+        window.localStorage.setItem('collection', JSON.stringify(collection));
+    }
+}
+
+function getPageNumber(){
+    let params = new URL(document.location).searchParams;
+    let newPageNumber = parseInt(params.get("page"));
+
+    if (newPageNumber) {
+        pageNumber = newPageNumber;
+    }
+    else {
+        pageNumber = 1;
+    }
+}
+function getNewSearchParams(){
+    let params = new URL(document.location).searchParams;
+    let genre = params.get("genre");
+    let decade = params.get("decade");
+    let country = params.get("country");
+    // let collection = params.get("collection");
+    // filteredPlates = plates;
+
+    // if (collection="show")
+    // {
+    //     filteredPlates = collection;
+    // }
+
+    if (genre) {
+        document.querySelector("#genre").value = genre;
+    }
+     if (decade) {
+        document.querySelector("#decade").value = decade;
+    }
+     if (country) {
+        document.querySelector("#country").value = country;
+    }
+}
+
+function changePageNumber(event) {
+    let params = new URL(document.location).searchParams;
+    // console.log(params.collection);
+    pageNumber = parseInt(event.target.id.slice(4));
+    // alert(pageNumber);
+    if (params.collection === "show"){
+        debugger;
+        showPlateCards(collection);
+    }
+    else {
+        setNewSearchParams();
+        showPlateCards(filteredPlates);
+    }
+    getPageNumber();
+}
+
+function pagesAddEventListeners(currentPlates){
+    if (currentPlates.length % maxPlatesOnPage === 0){
+        for (let i = 1; i <= currentPlates.length / maxPlatesOnPage; i++) {
+        document.querySelector(`#page${i}`).addEventListener("click", changePageNumber);
+        } 
+    } else {
+        for (let i = 1; i <= currentPlates.length / maxPlatesOnPage + 1; i++) {
+            document.querySelector(`#page${i}`).addEventListener("click", changePageNumber);
+        }   
+    }
 }
 
 function showPlateCards(currentPlates){
@@ -236,7 +370,6 @@ function showPlateCards(currentPlates){
         // if (index < currentPlates.length) {
         if (index >= maxPlatesOnPage * (pageNumber - 1)) {
             if (index < maxPlatesOnPage * pageNumber) {
-                // debugger;
                 platesHTML += `
                     <div class="col-6 pe-2">
                         <div class="plate-card">
@@ -255,7 +388,7 @@ function showPlateCards(currentPlates){
                                     <li><span class="text-black-50">Country: </span>${plate.country}</li>
                                 </ul>
                             </p>
-                            <button type="button" class="btn btn-dark button-add">
+                            <button type="button" id="button-add-${plates.indexOf(plate)}" class="btn btn-dark button-add">
                                 Add +
                             </button>
                         </div>
@@ -293,33 +426,47 @@ function showPlateCards(currentPlates){
     `;
 
     document.querySelector("#plates").innerHTML=platesHTML;
-    pagesAddEventListeners(filteredPlates);
+
+    buttonsAddEventListeners(currentPlates);
+    pagesAddEventListeners(currentPlates);
 }
 
-function changePageNumber(event) {
-    pageNumber = parseInt(event.target.id[4]);
-    // alert(pageNumber);
-    showPlateCards(filteredPlates);
-}
-
-function pagesAddEventListeners(currentPlates){
-    if (currentPlates.length % maxPlatesOnPage === 0){
-        for (let i = 1; i <= currentPlates.length / maxPlatesOnPage; i++) {
-        document.querySelector(`#page${i}`).addEventListener("click", changePageNumber);
-        } 
+function handleCollectionClick() {
+    
+    if (collection.length !== 0) {
+        pageNumber = 1;
+        // setNewSearchParams();
+        showPlateCards(collection);
+        window.history.pushState("", "", "?collection=show&page=1");
     } else {
-        for (let i = 1; i <= currentPlates.length / maxPlatesOnPage + 1; i++) {
-            document.querySelector(`#page${i}`).addEventListener("click", changePageNumber);
-        }   
+        alert("Your collection is empty now");
     }
 }
 
+function loadCollection() {
+    if (collectionFromStorage) {
+        collection = collectionFromStorage;
+        console.log("loadCollection");
+    }
+}
+
+loadCollection();
+getPageNumber();
+getNewSearchParams();
+search();
+
+ 
+
 
 document.getElementById("go-back").addEventListener("click", () => {
-  history.back();
+    history.back();
+    getPageNumber();
+    getNewSearchParams();
+    search();
 });
 
 document.querySelector("#search").addEventListener("click", handleSearchClick);
-showPlateCards(filteredPlates);
+document.querySelector("#collection").addEventListener("click", handleCollectionClick)
+
 
 

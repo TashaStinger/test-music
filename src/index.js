@@ -309,20 +309,22 @@ function handleSearchClick(){
 
 function addToCollection(event) {
     event.preventDefault();
-    alert("Add to Collection?");
     // debugger;
     let currentPlate = plates[parseInt(event.target.id.slice(11))];
     let plateInCollection = false;
     collection.forEach(function(plate, index) {
         if (plate.id === currentPlate.id) {
             plateInCollection = true;
-        }
+        }  
     })
     if (plateInCollection === false) {
+        alert("Add to Collection?");
         collection.push(currentPlate);
         console.log(collection);
         window.localStorage.removeItem('collection');
         window.localStorage.setItem('collection', JSON.stringify(collection));
+    } else {
+        alert("This plate is already in your collection");
     }
 }
 

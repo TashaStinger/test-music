@@ -234,53 +234,39 @@ function artistFilter(currentPlates) {
 }
 
 function setNewSearchParams(){
-    let newSerchParams = ``;
     let artist = document.querySelector("#artist").value.trim();
     let genre = document.querySelector("#genre").value;
     let decade = document.querySelector("#decade").value;
     let country = document.querySelector("#country").value;
     let params = new URL(document.location).searchParams;
-
-    newSerchParams = `?`;
+    let url = new URL (document.location);
+    url.search = "";
 
     if (params.get("collection") === "show") {
-        newSerchParams += `collection=show&`;
+        url.searchParams.append("collection", "show");
+        // console.log(url);
         document.querySelector("#artist").value = "";
         document.querySelector("#genre").value ="";
         document.querySelector("#decade").value = "";
         document.querySelector("#country").value = "";
-    } else {  
-        // if (genre !== "" || decade !== "" || country !== "" /*||  pageNumber > 1 */ ) {
-            //     // newSerchParams += `&`;
-            // }
-            
-            // if (artist !== "") {
-                //     newSerchParams+=`artist=${artist}`;
-                //     if (genre !== "" || decade !== "" || country !== "") {
-                    //         newSerchParams += `&`;
-                    //     }
-                    // }
-                    
+    } else {            
+        if (artist !== "") {
+            url.searchParams.append("artist", artist);
+        }   
         if (genre !== "") {
-            newSerchParams+=`genre=${genre}`;
-            if (decade !== "" || country !== "") {
-                newSerchParams += `&`;             
-            }
+            url.searchParams.append("genre", genre);
         }
         if (decade !== "") {
-            newSerchParams+=`decade=${decade}`;
-            if (country !== "") {
-                newSerchParams += `&`;
-            }
+            url.searchParams.append("decade", decade);
         }
         if (country !== "") {
-            newSerchParams += `country=${country}&`;
+            url.searchParams.append("country", country);
         }
     }
     // if (pageNumber > 1) {
-    newSerchParams += `page=${pageNumber}`;
+    url.searchParams.append("page", pageNumber);
     // }
-    window.history.pushState("", "", newSerchParams);
+    window.history.pushState("", "", url.search);
 }
 
 function search(){

@@ -136,6 +136,7 @@ let collection = [];
 let favoutites = [];
 
 let collectionFromStorage = JSON.parse(window.localStorage.getItem('collection'));
+let firstUrl = new URL(document.location);
 
 
 function checkArtistNameLength() {
@@ -351,7 +352,7 @@ function getNewSearchParams(){
     let genre = params.get("genre");
     let decade = params.get("decade");
     let country = params.get("country");
-    // let collection = params.get("collection");
+    let collection = params.get("collection");
 
     if (genre) {
         document.querySelector("#genre").value = genre;
@@ -487,7 +488,11 @@ function loadCollection() {
 loadCollection();
 getPageNumber();
 getNewSearchParams();
-search();
+if (firstUrl.searchParams.get("collection") === "show") {
+    showPlateCards(collection);
+} else {
+    search();
+}
 
 document.getElementById("go-back").addEventListener("click", () => {
     history.back();

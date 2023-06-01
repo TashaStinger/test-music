@@ -295,9 +295,11 @@ function handleSearchClick(){
 
 function buttonsAddEventListeners(currentPlates){
     currentPlates.forEach(function(plate, index) {
-        if (index >= maxPlatesOnPage * (pageNumber - 1)) {
-            if (index < maxPlatesOnPage * pageNumber) {
-                document.querySelector(`#button-add-${plates.indexOf(plate)}`).addEventListener("click", addToCollection);
+        if (document.getElementById(`#button-add-${plates.indexOf(plate)}`)){
+            if (index >= maxPlatesOnPage * (pageNumber - 1)) {
+                if (index < maxPlatesOnPage * pageNumber) {
+                    document.querySelector(`#button-add-${plates.indexOf(plate)}`).addEventListener("click", addToCollection);
+                }
             }
         }
     })
@@ -339,7 +341,7 @@ function getNewSearchParams(){
     let genre = params.get("genre");
     let decade = params.get("decade");
     let country = params.get("country");
-    let collection = params.get("collection");
+    // let collection = params.get("collection");
 
     if (artist) {
         document.querySelector("#artist").value = artist;
@@ -386,8 +388,12 @@ function pagesAddEventListeners(currentPlates){
 function showPlateCards(currentPlates){
     let params = new URL(document.location).searchParams;
     // console.log(params.get("collection"));
-    
-    let platesHTML = `
+    let platesHTML = ``;
+    if (params.get("collection") === "show"){
+                    platesHTML += `<h1 class="text-center">My Collection</h2>`;
+    }
+
+    platesHTML += `
         <div class="row">`;
     
     currentPlates.forEach(function(plate, index) {
@@ -411,10 +417,14 @@ function showPlateCards(currentPlates){
                                     <li><span class="text-black-50">Style: </span>${plate.style}</li>
                                     <li><span class="text-black-50">Country: </span>${plate.country}</li>
                                 </ul>
-                            </p>
+                            </p>`;
+                if (params.get("collection") !== "show"){
+                    platesHTML += `
                             <button type="button" id="button-add-${plates.indexOf(plate)}" class="btn btn-dark button-add">
                                 Add +
-                            </button>
+                            </button>`;
+                }
+                platesHTML += `
                         </div>
                     </div>
                 `;

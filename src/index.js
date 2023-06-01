@@ -224,10 +224,17 @@ function setNewSearchParams(){
     let genre = document.querySelector("#genre").value;
     let decade = document.querySelector("#decade").value;
     let country = document.querySelector("#country").value;
-    
-    if (genre !== "" || decade !== "" || country !== "" || pageNumber > 1) {
-        newSerchParams = `?`;
-    }
+    let params = new URL(document.location).searchParams;
+
+    newSerchParams = `?`;
+
+     if (params.get("collection") === "show") {
+            newSerchParams += `collection=show&`;
+    } 
+
+    // if (genre !== "" || decade !== "" || country !== "" /*||  pageNumber > 1 */ ) {
+    //     // newSerchParams += `&`;
+    // }
 
     // if (artist !== "") {
     //     newSerchParams+=`artist=${artist}`;
@@ -250,11 +257,11 @@ function setNewSearchParams(){
         }
     }
     if (country !== "") {
-        newSerchParams += `country=${country}`;
+        newSerchParams += `country=${country}&`;
     }
-    if (pageNumber > 1) {
-        newSerchParams += `&page=${pageNumber}`
-    }
+    // if (pageNumber > 1) {
+        newSerchParams += `page=${pageNumber}`;
+    // }
     window.history.pushState("", "", newSerchParams);
 }
 
@@ -269,11 +276,15 @@ function search(){
     artistFilter(filteredPlates);
 
     showPlateCards(filteredPlates);
+
     setNewSearchParams();
     // getPageNumber();
 }
 
 function handleSearchClick(){
+    let url = new URL(document.location);
+    url.search = "";
+    window.history.pushState("", "", url);
     pageNumber = 1;
     search();
 }
@@ -294,7 +305,7 @@ function addToCollection(event) {
     let currentPlate = plates[parseInt(event.target.id.slice(11))];
     if (collection.indexOf(currentPlate) === -1) {
         collection.push(currentPlate);
-        console.log(collection);
+        // console.log(collection);
         window.localStorage.removeItem('collection');
         window.localStorage.setItem('collection', JSON.stringify(collection));
     }
@@ -316,13 +327,6 @@ function getNewSearchParams(){
     let genre = params.get("genre");
     let decade = params.get("decade");
     let country = params.get("country");
-    // let collection = params.get("collection");
-    // filteredPlates = plates;
-
-    // if (collection="show")
-    // {
-    //     filteredPlates = collection;
-    // }
 
     if (genre) {
         document.querySelector("#genre").value = genre;
@@ -340,9 +344,9 @@ function changePageNumber(event) {
     // console.log(params.collection);
     pageNumber = parseInt(event.target.id.slice(4));
     // alert(pageNumber);
-    if (params.collection === "show"){
-        debugger;
+    if (params.get("collection") === "show"){
         showPlateCards(collection);
+        setNewSearchParams();
     }
     else {
         setNewSearchParams();
@@ -364,8 +368,12 @@ function pagesAddEventListeners(currentPlates){
 }
 
 function showPlateCards(currentPlates){
+    let params = new URL(document.location).searchParams;
+    // console.log(params.get("collection"));
+    
     let platesHTML = `
         <div class="row">`;
+    
     currentPlates.forEach(function(plate, index) {
         // if (index < currentPlates.length) {
         if (index >= maxPlatesOnPage * (pageNumber - 1)) {
@@ -436,8 +444,8 @@ function handleCollectionClick() {
     if (collection.length !== 0) {
         pageNumber = 1;
         // setNewSearchParams();
-        showPlateCards(collection);
         window.history.pushState("", "", "?collection=show&page=1");
+        showPlateCards(collection);
     } else {
         alert("Your collection is empty now");
     }
@@ -446,7 +454,7 @@ function handleCollectionClick() {
 function loadCollection() {
     if (collectionFromStorage) {
         collection = collectionFromStorage;
-        console.log("loadCollection");
+        // console.log("loadCollection");
     }
 }
 

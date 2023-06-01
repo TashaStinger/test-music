@@ -335,11 +335,15 @@ function getPageNumber(){
 }
 function getNewSearchParams(){
     let params = new URL(document.location).searchParams;
+    let artist = params.get("artist");
     let genre = params.get("genre");
     let decade = params.get("decade");
     let country = params.get("country");
     let collection = params.get("collection");
 
+    if (artist) {
+        document.querySelector("#artist").value = artist;
+    }
     if (genre) {
         document.querySelector("#genre").value = genre;
     }

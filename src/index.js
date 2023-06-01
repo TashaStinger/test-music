@@ -11,7 +11,7 @@ let plates=[
     },
     {
         id: 2,
-        name: "Bohemian Rhapsody",
+        name: "Bohemian Rhapsody / Sweet Lady",
         artist: "Queen",
         year: 1976,
         style: "Rock",
@@ -424,7 +424,7 @@ function showPlateCards(currentPlates){
                             <div class="image-plate">
                                 <img srcset="${plate.imgUrl_2x} 2x" src="${plate.imgUrl}" class="img-fluid plate-icon" alt="" />  
                             </div>
-                            <h3>${plate.name}</h3>
+                            <h3 class="text-truncate">${plate.name}</h3>
                             <p class="mb-2">
                                 ${plate.artist}
                                 <ul>

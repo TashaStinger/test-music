@@ -242,39 +242,42 @@ function setNewSearchParams(){
 
     newSerchParams = `?`;
 
-     if (params.get("collection") === "show") {
-            newSerchParams += `collection=show&`;
-    } 
-
-    // if (genre !== "" || decade !== "" || country !== "" /*||  pageNumber > 1 */ ) {
-    //     // newSerchParams += `&`;
-    // }
-
-    // if (artist !== "") {
-    //     newSerchParams+=`artist=${artist}`;
-    //     if (genre !== "" || decade !== "" || country !== "") {
-    //         newSerchParams += `&`;
-    //     }
-    // }
-
-    if (genre !== "") {
-        newSerchParams+=`genre=${genre}`;
-        if (decade !== "" || country !== "") {
-            newSerchParams += `&`;
-
+    if (params.get("collection") === "show") {
+        newSerchParams += `collection=show&`;
+        document.querySelector("#artist").value = "";
+        document.querySelector("#genre").value ="";
+        document.querySelector("#decade").value = "";
+        document.querySelector("#country").value = "";
+    } else {  
+        // if (genre !== "" || decade !== "" || country !== "" /*||  pageNumber > 1 */ ) {
+            //     // newSerchParams += `&`;
+            // }
+            
+            // if (artist !== "") {
+                //     newSerchParams+=`artist=${artist}`;
+                //     if (genre !== "" || decade !== "" || country !== "") {
+                    //         newSerchParams += `&`;
+                    //     }
+                    // }
+                    
+        if (genre !== "") {
+            newSerchParams+=`genre=${genre}`;
+            if (decade !== "" || country !== "") {
+                newSerchParams += `&`;             
+            }
         }
-    }
-    if (decade !== "") {
-        newSerchParams+=`decade=${decade}`;
+        if (decade !== "") {
+            newSerchParams+=`decade=${decade}`;
+            if (country !== "") {
+                newSerchParams += `&`;
+            }
+        }
         if (country !== "") {
-            newSerchParams += `&`;
+            newSerchParams += `country=${country}&`;
         }
-    }
-    if (country !== "") {
-        newSerchParams += `country=${country}&`;
     }
     // if (pageNumber > 1) {
-        newSerchParams += `page=${pageNumber}`;
+    newSerchParams += `page=${pageNumber}`;
     // }
     window.history.pushState("", "", newSerchParams);
 }
@@ -390,7 +393,7 @@ function pagesAddEventListeners(currentPlates){
 }
 
 function showPlateCards(currentPlates){
-    // let params = new URL(document.location).searchParams;
+    let params = new URL(document.location).searchParams;
     // console.log(params.get("collection"));
     
     let platesHTML = `
@@ -465,9 +468,10 @@ function handleCollectionClick() {
     
     if (collection.length !== 0) {
         pageNumber = 1;
-        // setNewSearchParams();
         window.history.pushState("", "", "?collection=show&page=1");
+        setNewSearchParams();
         showPlateCards(collection);
+        
     } else {
         alert("Your collection is empty now");
     }

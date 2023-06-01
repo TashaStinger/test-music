@@ -428,14 +428,23 @@ function showPlateCards(currentPlates){
                             <p class="mb-2">
                                 ${plate.artist}
                                 <ul>
-                                    <li><span class="text-black-50">Year: </span>${plate.year}</li>
-                                    <li><span class="text-black-50">Style: </span>${plate.style}</li>
-                                    <li><span class="text-black-50">Country: </span>${plate.country}</li>
+                                    <li><span class="text-black-50 text-truncate">Year: </span>${plate.year}</li>
+                                    <li><span class="text-black-50 text-truncate">Style: </span>${plate.style}</li>
+                                    <li><span class="text-black-50 text-truncate">Country: </span>${plate.country}</li>
                                 </ul>
-                            </p>
+                            </p>`;
+                if (params.get("collection") === "show"){
+                    platesHTML += `
+                            <button type="button" id="button-add-${plates.indexOf(plate)}" class="btn btn-dark button-add visually-hidden">
+                                Add +
+                            </button>`;
+                } else {
+                    platesHTML += `
                             <button type="button" id="button-add-${plates.indexOf(plate)}" class="btn btn-dark button-add">
                                 Add +
-                            </button>
+                            </button>`;
+                }
+                platesHTML += `
                         </div>
                     </div>
                 `;

@@ -1,5 +1,6 @@
 let plates=[
     {
+        id: 1,
         name: "Let There Be Rock",
         artist: "AC/DC",
         year: 1990,
@@ -8,6 +9,7 @@ let plates=[
         imgUrl: "images/img1.png"
     },
     {
+        id: 2,
         name: "Song 2",
         artist: "Artist 2",
         year: 1992,
@@ -16,6 +18,7 @@ let plates=[
         imgUrl: "images/img2.png"
     },
     {
+        id: 3,
         name: "Song 3",
         artist: "Artist 2",
         year: 1993,
@@ -24,6 +27,7 @@ let plates=[
         imgUrl: "images/img3.png"
     },
     {
+        id: 4,
         name: "Song 4",
         artist: "Artist 4",
         year: 1954,
@@ -32,6 +36,7 @@ let plates=[
         imgUrl: "images/img4.png"
     },
     {
+        id: 5,
         name: "Song 5",
         artist: "Artist 4",
         year: 1955,
@@ -40,6 +45,7 @@ let plates=[
         imgUrl: "images/img5.png"
     },
     {
+        id: 6,
         name: "Song 6",
         artist: "Artist 6",
         year: 2004,
@@ -48,6 +54,7 @@ let plates=[
         imgUrl: "images/img6.png"
     },
     {
+        id: 7,
         name: "Song 7",
         artist: "AC/DC",
         year: 1998,
@@ -56,6 +63,7 @@ let plates=[
         imgUrl: "images/img1.png"
     },
     {
+        id: 8,
         name: "Song 8",
         artist: "Artist 2",
         year: 1999,
@@ -64,6 +72,7 @@ let plates=[
         imgUrl: "images/img2.png"
     },
     {
+        id: 9,
         name: "Song 9",
         artist: "Artist 2",
         year: 1997,
@@ -72,6 +81,7 @@ let plates=[
         imgUrl: "images/img3.png"
     },
     {
+        id: 10,
         name: "Song 10",
         artist: "Artist 4",
         year: 1954,
@@ -80,6 +90,7 @@ let plates=[
         imgUrl: "images/img4.png"
     },
     {
+        id: 11,
         name: "Song 11",
         artist: "Artist 4",
         year: 1955,
@@ -88,6 +99,7 @@ let plates=[
         imgUrl: "images/img5.png"
     },
     {
+        id: 12,
         name: "Song 12",
         artist: "Artist 6",
         year: 2004,
@@ -96,6 +108,7 @@ let plates=[
         imgUrl: "images/img6.png"
     },
     {
+        id: 13,
         name: "Song 13",
         artist: "Artist 4",
         year: 1955,
@@ -104,6 +117,7 @@ let plates=[
         imgUrl: "images/img5.png"
     },
     {
+        id: 14,
         name: "Song 14",
         artist: "Artist 6",
         year: 2004,
@@ -302,10 +316,17 @@ function buttonsAddEventListeners(currentPlates){
 function addToCollection(event) {
     event.preventDefault();
     alert("Add to Collection?");
+    // debugger;
     let currentPlate = plates[parseInt(event.target.id.slice(11))];
-    if (collection.indexOf(currentPlate) === -1) {
+    let plateInCollection = false;
+    collection.forEach(function(plate, index) {
+        if (plate.id === currentPlate.id) {
+            plateInCollection = true;
+        }
+    })
+    if (plateInCollection === false) {
         collection.push(currentPlate);
-        // console.log(collection);
+        console.log(collection);
         window.localStorage.removeItem('collection');
         window.localStorage.setItem('collection', JSON.stringify(collection));
     }
@@ -327,6 +348,7 @@ function getNewSearchParams(){
     let genre = params.get("genre");
     let decade = params.get("decade");
     let country = params.get("country");
+    // let collection = params.get("collection");
 
     if (genre) {
         document.querySelector("#genre").value = genre;
@@ -368,7 +390,7 @@ function pagesAddEventListeners(currentPlates){
 }
 
 function showPlateCards(currentPlates){
-    let params = new URL(document.location).searchParams;
+    // let params = new URL(document.location).searchParams;
     // console.log(params.get("collection"));
     
     let platesHTML = `
@@ -462,9 +484,6 @@ loadCollection();
 getPageNumber();
 getNewSearchParams();
 search();
-
- 
-
 
 document.getElementById("go-back").addEventListener("click", () => {
     history.back();

@@ -6,25 +6,28 @@ let plates=[
         year: 1990,
         style: "Rock",
         country: "USA",
-        imgUrl: "images/img1.png"
+        imgUrl: "images/img8.jpg",
+        imgUrl_2x: "images/img8_2x.jpg",
     },
     {
         id: 2,
-        name: "Song 2",
-        artist: "Artist 2",
-        year: 1992,
-        style: "Popular",
-        country: "USA",
-        imgUrl: "images/img2.png"
+        name: "Bohemian Rhapsody",
+        artist: "Queen",
+        year: 1976,
+        style: "Rock",
+        country: "Turkey",
+        imgUrl: "images/img7.jpg",
+        imgUrl_2x: "images/img7_2x.jpg"
     },
     {
         id: 3,
-        name: "Song 3",
-        artist: "Artist 2",
-        year: 1993,
-        style: "Popular",
+        name: "Elvis",
+        artist: "Elvis Presley",
+        year: 1956,
+        style: "Rock",
         country: "USA",
-        imgUrl: "images/img3.png"
+        imgUrl: "images/img9.jpg",
+        imgUrl_2x: "images/img9_2x.jpg"
     },
     {
         id: 4,
@@ -33,7 +36,8 @@ let plates=[
         year: 1954,
         style: "Popular",
         country: "France",
-        imgUrl: "images/img4.png"
+        imgUrl: "images/img4.png",
+        imgUrl_2x: "images/img4.png"
     },
     {
         id: 5,
@@ -42,7 +46,8 @@ let plates=[
         year: 1955,
         style: "Popular",
         country: "France",
-        imgUrl: "images/img5.png"
+        imgUrl: "images/img5.png",
+        imgUrl_2x: "images/img5.png"
     },
     {
         id: 6,
@@ -51,7 +56,8 @@ let plates=[
         year: 2004,
         style: "Rock",
         country: "Ukraine",
-        imgUrl: "images/img6.png"
+        imgUrl: "images/img6.png",
+        imgUrl_2x: "images/img6.png"
     },
     {
         id: 7,
@@ -60,7 +66,8 @@ let plates=[
         year: 1998,
         style: "Rock",
         country: "USA",
-        imgUrl: "images/img1.png"
+        imgUrl: "images/img1.png",
+        imgUrl_2x: "images/img1.png"
     },
     {
         id: 8,
@@ -69,7 +76,8 @@ let plates=[
         year: 1999,
         style: "Popular",
         country: "USA",
-        imgUrl: "images/img2.png"
+        imgUrl: "images/img2.png",
+        imgUrl_2x: "images/img2.png"
     },
     {
         id: 9,
@@ -78,7 +86,8 @@ let plates=[
         year: 1997,
         style: "Popular",
         country: "USA",
-        imgUrl: "images/img3.png"
+        imgUrl: "images/img3.png",
+        imgUrl_2x: "images/img3.png"
     },
     {
         id: 10,
@@ -87,7 +96,8 @@ let plates=[
         year: 1954,
         style: "Popular",
         country: "France",
-        imgUrl: "images/img4.png"
+        imgUrl: "images/img4.png",
+        imgUrl_2x: "images/img4.png"
     },
     {
         id: 11,
@@ -96,7 +106,8 @@ let plates=[
         year: 1955,
         style: "Popular",
         country: "France",
-        imgUrl: "images/img5.png"
+        imgUrl: "images/img5.png",
+        imgUrl_2x: "images/img5.png"
     },
     {
         id: 12,
@@ -105,7 +116,8 @@ let plates=[
         year: 2004,
         style: "Rock",
         country: "USA",
-        imgUrl: "images/img6.png"
+        imgUrl: "images/img6.png",
+        imgUrl_2x: "images/img6.png"
     },
     {
         id: 13,
@@ -114,7 +126,8 @@ let plates=[
         year: 1955,
         style: "Popular",
         country: "France",
-        imgUrl: "images/img5.png"
+        imgUrl: "images/img5.png",
+        imgUrl_2x: "images/img5.png"
     },
     {
         id: 14,
@@ -123,7 +136,8 @@ let plates=[
         year: 2004,
         style: "Rock",
         country: "Ukraine",
-        imgUrl: "images/img6.png"
+        imgUrl: "images/img6.png",
+        imgUrl_2x: "images/img6.png"
     }
 ]
 
@@ -293,18 +307,6 @@ function handleSearchClick(){
     search();
 }
 
-function buttonsAddEventListeners(currentPlates){
-    currentPlates.forEach(function(plate, index) {
-        if (document.getElementById(`#button-add-${plates.indexOf(plate)}`)){
-            if (index >= maxPlatesOnPage * (pageNumber - 1)) {
-                if (index < maxPlatesOnPage * pageNumber) {
-                    document.querySelector(`#button-add-${plates.indexOf(plate)}`).addEventListener("click", addToCollection);
-                }
-            }
-        }
-    })
-}
-
 function addToCollection(event) {
     event.preventDefault();
     alert("Add to Collection?");
@@ -322,6 +324,19 @@ function addToCollection(event) {
         window.localStorage.removeItem('collection');
         window.localStorage.setItem('collection', JSON.stringify(collection));
     }
+}
+
+function buttonsAddEventListeners(currentPlates){
+    currentPlates.forEach(function(plate, index) {
+        // debugger;
+        // if (document.getElementById(`#button-add-${plates.indexOf(plate)}`) !== undefined){
+            if (index >= maxPlatesOnPage * (pageNumber - 1)) {
+                if (index < maxPlatesOnPage * pageNumber) {
+                    document.querySelector(`#button-add-${plates.indexOf(plate)}`).addEventListener("click", addToCollection);
+                }
+            }
+        // }
+    })
 }
 
 function getPageNumber(){
@@ -407,7 +422,7 @@ function showPlateCards(currentPlates){
                                 <img src="images/heart2_icon.png" />
                             </button>
                             <div class="image-plate">
-                                <img src="${plate.imgUrl}" class="img-fluid plate-icon" />  
+                                <img srcset="${plate.imgUrl_2x} 2x" src="${plate.imgUrl}" class="img-fluid plate-icon" alt="" />  
                             </div>
                             <h3>${plate.name}</h3>
                             <p class="mb-2">
@@ -417,14 +432,10 @@ function showPlateCards(currentPlates){
                                     <li><span class="text-black-50">Style: </span>${plate.style}</li>
                                     <li><span class="text-black-50">Country: </span>${plate.country}</li>
                                 </ul>
-                            </p>`;
-                if (params.get("collection") !== "show"){
-                    platesHTML += `
+                            </p>
                             <button type="button" id="button-add-${plates.indexOf(plate)}" class="btn btn-dark button-add">
                                 Add +
-                            </button>`;
-                }
-                platesHTML += `
+                            </button>
                         </div>
                     </div>
                 `;
